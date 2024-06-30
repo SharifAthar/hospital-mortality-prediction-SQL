@@ -124,16 +124,17 @@ FROM patient_survival.ps_data;
 
 -- What was the percentage of patients with each comorbidity among those who died? 
 SELECT
-    ROUND(SUM(CASE WHEN aids = 1 THEN 1 ELSE 0 END) * 100 / COUNT(*),2) AS aids_percentage,
-    ROUND(SUM(CASE WHEN cirrhosis = 1 THEN 1 ELSE 0 END) * 100 / COUNT(*),2) AS cirrhosis_percentage,
-    ROUND(SUM(CASE WHEN diabetes_mellitus = 1 THEN 1 ELSE 0 END) * 100 / COUNT(*),2) AS diabetes_percentage,
-    ROUND(SUM(CASE WHEN hepatic_failure = 1 THEN 1 ELSE 0 END) * 100 / COUNT(*),2) AS hepatic_failure_percentage,
-    ROUND(SUM(CASE WHEN immunosuppression = 1 THEN 1 ELSE 0 END) * 100 / COUNT(*),2) AS immunosuppression_percentage,
-    ROUND(SUM(CASE WHEN leukemia = 1 THEN 1 ELSE 0 END) * 100 / COUNT(*),2) AS leukemia_percentage,
-    ROUND(SUM(CASE WHEN lymphoma = 1 THEN 1 ELSE 0 END) * 100 / COUNT(*),2) AS lymphoma_percentage,
-    ROUND(SUM(CASE WHEN solid_tumor_with_metastasis = 1 THEN 1 ELSE 0 END) * 100 / COUNT(*),2) AS solid_tumor_percentage
+    ROUND(SUM(CASE WHEN aids = 1 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS aids_percentage,
+    ROUND(SUM(CASE WHEN cirrhosis = 1 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS cirrhosis_percentage,
+    ROUND(SUM(CASE WHEN diabetes_mellitus = 1 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS diabetes_percentage,
+    ROUND(SUM(CASE WHEN hepatic_failure = 1 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS hepatic_failure_percentage,
+    ROUND(SUM(CASE WHEN immunosuppression = 1 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS immunosuppression_percentage,
+    ROUND(SUM(CASE WHEN leukemia = 1 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS leukemia_percentage,
+    ROUND(SUM(CASE WHEN lymphoma = 1 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS lymphoma_percentage,
+    ROUND(SUM(CASE WHEN solid_tumor_with_metastasis = 1 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS solid_tumor_percentage
 FROM patient_survival.ps_data
 WHERE hospital_death = 1;
+
 
 -- What is the mortality rate in percentage? 
 SELECT
@@ -207,10 +208,11 @@ GROUP BY bmi_category;
 -- Hospital death probabilities where the ICU type is 'SICU' and BMI is above 30
 SELECT
     patient_id,
-    apache_4a_hospital_death_prob as hospital_death_prob
+    apache_4a_hospital_death_prob AS hospital_death_prob
 FROM patient_survival.ps_data
 WHERE icu_type = 'SICU' AND bmi > 30
 ORDER BY hospital_death_prob DESC;
+
 
 
 
