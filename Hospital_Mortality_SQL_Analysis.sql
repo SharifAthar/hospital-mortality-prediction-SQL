@@ -4,7 +4,7 @@ SET ethnicity = CASE
     ELSE ethnicity
     END;
 
--- How many total deaths occured in the hospital and what was the percentage of the mortality rate?
+-- How many total death occured in the hospital and what was the percentage of the mortality rate?
 SELECT COUNT(CASE WHEN hospital_death = 1 THEN 1 END) AS total_hospital_deaths, 
 ROUND(COUNT(CASE WHEN hospital_death = 1 THEN 1 END)*100/COUNT(*),2) AS mortality_rate
 FROM patient_survival.ps_data
